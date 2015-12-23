@@ -1,0 +1,21 @@
+<div flex="50" flex-sm="50" flex-xs="50" layout="column">
+<md-card ng-controller="uploadCtrl">
+    <md-card-title>
+        <md-card-title-media>
+            <div class="md-media-sm card-media">
+                <img ng-if="type == 'picture'" ngf-thumbnail="file || '/thumb.png'" />
+            </div>
+        </md-card-title-media>
+        <md-card-title-text>
+            <span class="md-headline">ピクチャ</span>
+        </md-card-title-text>
+    </md-card-title>
+    <md-card-actions layout="row" layout-align="end center">
+        <md-button 
+         ngf-select ng-model="file" name="file" ngf-pattern="'image/*'"
+         ngf-accept="'image/*'"class="md-raised md-primary">
+            Select            
+        </md-button>
+    </md-card-actions>
+</md-card>
+</div>
