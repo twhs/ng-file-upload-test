@@ -1,7 +1,7 @@
 (function(){
     'use strict';
     angular
-    .module('UploadApp', ['ngFileUpload'])
+    .module('UploadApp', ['ngFileUpload', 'ngImgCrop'])
     .directive('upload', function() {
         return {
             restrict: 'E',
@@ -32,5 +32,22 @@
                 console.log('progress: ' + progressPercentage + '%');
             });
         };
+
+        $scope.myImage='';
+        $scope.myCroppedImage='';
+
+        var handleFileSelect=function(evt) {
+            var file=evt.currentTarget.files[0];
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+                $scope.$apply(function($scope){
+                    console.log(evt.target.result);
+                    $scope.myImage=evt.target.result;
+                    console.log($scope.myImage);
+                });
+            };
+            console.log(reader.readAsDataURL(file));
+        };
+        angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
     }]);
 }());

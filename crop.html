@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ja" ng-app="UploadApp">
+<html lang="ja" ng-app="CropApp">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
@@ -8,16 +8,40 @@
     <meta name="author" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.2.4/cropper.min.css">
+    <link rel="stylesheet" href="ng-img-crop.css">
     <!--[if lt IE 9]>
     <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <link rel="shortcut icon" href="">
+    <style>
+        .cropArea {
+            background: #E4E4E4;
+            overflow: hidden;
+            width:500px;
+            height:350px;
+        }
+    </style>
 </head>
-<body ng-cloak>
+<body ng-cloak ng-controller="CropCtrl">
     <h1>Upload</h1>
-    <upload upload-type="picture"></upload>
+
+    <form ng-app="fileUpload" ng-controller="CropCtrl" name="form">
+        Single Image with validations
+        <div class="button" ngf-select="selected($file, $event)" ng-model="file" name="file" ngf-pattern="'image/*'"
+                                                                   ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100" 
+                                                                                                              ngf-resize="{width: 100, height: 100}">Select</div>
+        Multiple files
+        <div class="button" ngf-select ng-model="files" ngf-multiple="true">Select</div>
+        Drop files: <div ngf-drop ng-model="files" class="drop-box">Drop</div>
+        <button type="submit" ng-click="submit()">submit</button>
+    </form>
+    <div>Select an image file: <input type="file" id="fileInput" /></div>
+    <div class="cropArea">
+        <img-crop image="myImage" result-image="myCroppedImage"></img-crop>
+    </div>
+    <div>Cropped Image:</div>
+</div>
     <!-- SCRIPTS -->
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -28,7 +52,7 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
     <script src="ng-file-upload/ng-file-upload-shim.min.js"></script>
     <script src="ng-file-upload/ng-file-upload.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.2.4/cropper.min.js"></script>
-    <script src="upload.js"></script>
+    <script src="ng-img-crop.js"></script>
+    <script src="crop.js"></script>
 </body>
 </html>
